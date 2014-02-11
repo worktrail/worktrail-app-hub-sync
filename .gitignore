@@ -1,0 +1,12 @@
+/bin
+/build
+/.gradle
+/.settings
+/.classpath
+/.project
+/gitsync.properties
+/gitsync.save.properties
+/activitystream.properties
+/activitystreamsync.properties
+/activitystreamsync.save.properties
+
