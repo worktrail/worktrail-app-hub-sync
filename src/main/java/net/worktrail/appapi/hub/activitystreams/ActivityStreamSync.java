@@ -18,6 +18,7 @@ import net.worktrail.appapi.hub.WorkTrailSync;
 import net.worktrail.appapi.hub.git.SyncStorage;
 import net.worktrail.appapi.model.Employee;
 import net.worktrail.appapi.model.HubEntry;
+import net.worktrail.appapi.model.Privacy;
 import net.worktrail.appapi.model.SrcType;
 import nu.xom.Attribute;
 import nu.xom.Builder;
@@ -36,6 +37,7 @@ public class ActivityStreamSync extends WorkTrailSync {
 	private String url;
 	private String username;
 	private String password;
+	private Privacy defaultPrivacy;
 
 	public ActivityStreamSync(SyncStorage storage, WorkTrailAppApi auth,
 			String[] args) {
@@ -53,6 +55,10 @@ public class ActivityStreamSync extends WorkTrailSync {
 			url = props.getProperty("activitystream.url");
 			username = props.getProperty("activitystream.username");
 			password = props.getProperty("activitystream.password");
+			String privacy = props.getProperty("activitystream.privacy");
+			if (privacy != null) {
+				defaultPrivacy = Privacy.getPrivacyByStringIdentifier(privacy);
+			}
 			if (url == null) {
 				throw new RuntimeException("Please create property: activitystream.url in properties file.");
 			}
@@ -119,7 +125,7 @@ public class ActivityStreamSync extends WorkTrailSync {
 						continue;
 					}
 					
-					toCreate.add(new HubEntry(identifier, employee, updated.getTime(), null, SrcType.ISSUES, entryTitleText, link));
+					toCreate.add(new HubEntry(identifier, employee, updated.getTime(), null, SrcType.ISSUES, entryTitleText, link, defaultPrivacy));
 				} else {
 					Element itemElement = element.getFirstChildElement("title", atomNamespace);
 					if (itemElement != null) {

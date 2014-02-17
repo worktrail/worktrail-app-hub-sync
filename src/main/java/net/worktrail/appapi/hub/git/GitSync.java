@@ -15,6 +15,7 @@ import net.worktrail.appapi.WorkTrailAppApi;
 import net.worktrail.appapi.hub.WorkTrailSync;
 import net.worktrail.appapi.model.Employee;
 import net.worktrail.appapi.model.HubEntry;
+import net.worktrail.appapi.model.Privacy;
 import net.worktrail.appapi.model.SrcType;
 
 import org.eclipse.jgit.api.Git;
@@ -31,6 +32,7 @@ public class GitSync extends WorkTrailSync {
 	private Properties props;
 	private String urlPrefix;
 	private String projectName;
+	private Privacy defaultPrivacy;
 
 	public GitSync(WorkTrailAppApi auth, SyncStorage storage, File gitRepository) {
 		super(auth, storage);
@@ -58,6 +60,10 @@ public class GitSync extends WorkTrailSync {
 		
 		urlPrefix = props.getProperty("urlprefix");
 		projectName = props.getProperty("projectName");
+		String privacy = props.getProperty("privacy");
+		if (privacy != null) {
+			defaultPrivacy = Privacy.getPrivacyByStringIdentifier(privacy);
+		}
 		if (projectName == null) {
 			projectName = gitRepository.getName();
 		}
@@ -93,7 +99,8 @@ public class GitSync extends WorkTrailSync {
 									null,
 									SrcType.SCM,
 									"Git Commit ("+projectName+"): " + rev.getShortMessage(),
-									urlPrefix == null ? null : urlPrefix + rev.getId().getName()));
+									urlPrefix == null ? null : urlPrefix + rev.getId().getName(),
+									defaultPrivacy));
 //					identifier.add(rev.getId().getName());
 				} else {
 //					System.out.println("No such user: " + emailAddress);
