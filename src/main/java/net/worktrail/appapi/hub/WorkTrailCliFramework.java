@@ -71,7 +71,13 @@ public abstract class WorkTrailCliFramework {
 		try {
 			sync.prepareHubSync();
 			List<HubEntry> toCreate = sync.startHubSync();
-			sync.finishHubSync(toCreate);
+//			if (toCreate.size() > 100) {
+//				for (int i = 0 ; i < toCreate.size() ; i+=100) {
+//					sync.finishHubSync(toCreate.subList(i, Math.min(i+100, toCreate.size())));
+//				}
+//			} else {
+				sync.finishHubSync(toCreate);
+//			}
 		} catch (Exception e) {
 			throw new RuntimeException("Error while running hub sync", e);
 		}
@@ -95,7 +101,7 @@ public abstract class WorkTrailCliFramework {
 		}
 	}
 
-	private void authenticate() {
+	protected void authenticate() {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			if (storage.getString(STORE_APPKEY) == null || storage.getString(STORE_SECRETAPIKEY) == null) {
@@ -108,8 +114,7 @@ public abstract class WorkTrailCliFramework {
 			}
 			
 			auth = new WorkTrailAppApi(storage.getString(STORE_APPKEY), storage.getString(STORE_SECRETAPIKEY), storage.getString(STORE_AUTHTOKEN));
-			CreateAuthResponse authRequest = auth.createAuthRequest(WorkTrailAccessType.COMPANY, new WorkTrailScope[] {
-					WorkTrailScope.READ_EMPLOYEES, WorkTrailScope.SYNC_HUB_DATA });
+			CreateAuthResponse authRequest = auth.createAuthRequest(getAccessType(), getAuthScopes());
 			storage.setString(STORE_AUTHTOKEN, authRequest.getAuthToken());
 			URL redirectUrl = authRequest.getRedirectUrl();
 			System.out.println("Please open the following URL in your Browser and authorize this app:");
@@ -130,8 +135,21 @@ public abstract class WorkTrailCliFramework {
 			throw new RuntimeException("Error while configuring app key.", e);
 		}
 	}
+	
+	protected WorkTrailAccessType getAccessType() {
+		return WorkTrailAccessType.COMPANY;
+	}
 
-	private boolean hasAuthentication() {
+	protected WorkTrailScope[] getAuthScopes() {
+		return new WorkTrailScope[] {
+				WorkTrailScope.READ_EMPLOYEES, WorkTrailScope.SYNC_HUB_DATA };
+	}
+
+	protected WorkTrailAppApi getAuth() {
+		return auth;
+	}
+
+	protected boolean hasAuthentication() {
 		return storage.getString(STORE_APPKEY) != null
 				&& storage.getString(STORE_SECRETAPIKEY) != null
 				&& storage.getString(STORE_AUTHTOKEN) != null;
