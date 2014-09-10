@@ -13,7 +13,7 @@ https://bitbucket.org/tapo/worktrail-app-api
 
 Checkout and run:
 
-    ./gradlew  ./gradlew publishMavenJavaPublicationToMavenLocal
+    ./gradlew publishMavenJavaPublicationToMavenLocal
 
 ## Development
 
@@ -21,3 +21,8 @@ Checkout and run:
 
 and import into your eclipse workspace.
 
+# License
+
+worktrail-app-api is available under The BSD 2-Clause License. Please
+contribute back by sending us pull requests on github:
+https://github.com/worktrail/worktrail-app-api
