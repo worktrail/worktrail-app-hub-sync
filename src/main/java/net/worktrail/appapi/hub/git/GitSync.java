@@ -12,6 +12,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import net.worktrail.appapi.WorkTrailAppApi;
+import net.worktrail.appapi.hub.SyncStorage;
 import net.worktrail.appapi.hub.WorkTrailSync;
 import net.worktrail.appapi.model.Employee;
 import net.worktrail.appapi.model.HubEntry;

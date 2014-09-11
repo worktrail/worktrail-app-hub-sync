@@ -8,13 +8,16 @@ import java.util.Set;
 
 import net.worktrail.appapi.EmployeeListResponse;
 import net.worktrail.appapi.WorkTrailAppApi;
-import net.worktrail.appapi.hub.git.SyncStorage;
 import net.worktrail.appapi.model.Employee;
 import net.worktrail.appapi.model.EmployeeImpl;
 import net.worktrail.appapi.model.HubEntry;
 import net.worktrail.appapi.response.CreateHubEntriesResponse;
 import net.worktrail.appapi.response.RequestErrorException;
 
+/**
+ * Base class for synchronizing remote objects into the WorkTrail Hub. Makes it easy
+ * to map employee email address with employee Ids within WorkTrail.
+ */
 public abstract class WorkTrailSync {
 	
 	private WorkTrailAppApi auth;

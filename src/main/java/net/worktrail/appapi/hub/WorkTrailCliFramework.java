@@ -10,12 +10,18 @@ import java.util.List;
 import net.worktrail.appapi.WorkTrailAccessType;
 import net.worktrail.appapi.WorkTrailAppApi;
 import net.worktrail.appapi.WorkTrailScope;
-import net.worktrail.appapi.hub.git.PropertySyncStorage;
-import net.worktrail.appapi.hub.git.SyncStorage;
 import net.worktrail.appapi.model.HubEntry;
 import net.worktrail.appapi.response.CreateAuthResponse;
 import net.worktrail.appapi.response.RequestErrorException;
 
+/**
+ * Base class providing a simple framework for sync processes which are launched from the
+ * command line. Handles authentication and persisting of simple properties 
+ * (e.g. authentication tokens, app keys, etc.). Currently simply uses a java
+ * properties store.
+ * 
+ * @author herbert
+ */
 public abstract class WorkTrailCliFramework {
 	private static final String STORE_APPKEY = "appkey";
 	private static final String STORE_SECRETAPIKEY = "secretapikey";

@@ -8,37 +8,33 @@ group = 'net.worktrail';
 version = '0.0.1'
 
 repositories {
-  mavenLocal()
-  mavenCentral();
+	mavenLocal()
+	mavenCentral();
 }
 
 publishing {
-  publications {
-    mavenJava(MavenPublication) {
-      from components.java
-    }
-  }
+	publications {
+		mavenJava(MavenPublication) { from components.java }
+	}
 }
 
 
 dependencies {
-	compile 'net.worktrail:worktrail-app-api:0.1.5'
+	compile 'net.worktrail:worktrail-app-api:0.2.0'
 	compile 'org.eclipse.jgit:org.eclipse.jgit:3.2.0.201312181205-r'
 	compile 'org.json:json:20090211'
 	compile 'org.mapdb:mapdb:0.9.8'
 	compile 'com.google.guava:guava:15.0'
-	
+
 	// dependencies for activitystreams:
 	compile 'xom:xom:1.2.5'
 	compile 'org.jsoup:jsoup:1.7.3'
-	
-	testCompile 'junit:junit:4.11' 
+
+	testCompile 'junit:junit:4.11'
 }
 
 jar {
-	manifest {
-		attributes 'Main-Class': 'net.worktrail.appapi.hub.Launcher'
-	}
+	manifest { attributes 'Main-Class': 'net.worktrail.appapi.hub.Launcher' }
 }
 
 

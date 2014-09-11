@@ -5,6 +5,10 @@ import java.util.Arrays;
 import net.worktrail.appapi.hub.activitystreams.ActivityStreamCli;
 import net.worktrail.appapi.hub.git.GitSyncCli;
 
+/**
+ * Unified launcher of all syncs in worktrail-app-hub-sync. Currently supports launching the
+ * git sync and activitystreams sync.
+ */
 public class Launcher {
 	public static void main(String[] args) {
 		if (args.length < 1) {

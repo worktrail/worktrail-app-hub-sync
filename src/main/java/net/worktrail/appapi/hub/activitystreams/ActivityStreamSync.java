@@ -14,8 +14,8 @@ import java.util.Properties;
 import javax.xml.bind.DatatypeConverter;
 
 import net.worktrail.appapi.WorkTrailAppApi;
+import net.worktrail.appapi.hub.SyncStorage;
 import net.worktrail.appapi.hub.WorkTrailSync;
-import net.worktrail.appapi.hub.git.SyncStorage;
 import net.worktrail.appapi.model.Employee;
 import net.worktrail.appapi.model.HubEntry;
 import net.worktrail.appapi.model.Privacy;
@@ -30,6 +30,9 @@ import nu.xom.ParsingException;
 import org.eclipse.jgit.util.Base64;
 import org.jsoup.Jsoup;
 
+/**
+ * Synchronize an activity stream (e.g. from Jira activities) into WorkTrail Hub.
+ */
 public class ActivityStreamSync extends WorkTrailSync {
 
 	private SyncStorage storage;
@@ -137,9 +140,6 @@ public class ActivityStreamSync extends WorkTrailSync {
 			}
 			
 			return toCreate;
-			
-//			new XMLPa
-//			urlConneciton.set
 		} catch (IOException | ParsingException e) {
 			e.printStackTrace();
 			return null;

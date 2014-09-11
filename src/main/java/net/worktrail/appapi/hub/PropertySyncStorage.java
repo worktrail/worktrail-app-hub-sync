@@ -1,4 +1,4 @@
-package net.worktrail.appapi.hub.git;
+package net.worktrail.appapi.hub;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,6 +6,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * A simple sync storage implementation based on java property files. It uses
+ * two distinct property files: One for storing general configuration properties 
+ * ({@link #setString(String, String)}, {@link #getString(String)} for e.g. auth tokens)
+ * and a second one to store which objects were synced ({@link #syncedObject(String, long)},
+ * {@link #wasObjectSynced(String)}).
+ * 
+ * @author herbert
+ */
 public class PropertySyncStorage implements SyncStorage {
 	
 	private Properties props;
@@ -15,6 +24,11 @@ public class PropertySyncStorage implements SyncStorage {
 	private boolean dirtySyncProps;
 	private File syncStorageFile;
 	
+	/**
+	 * Initialize a new property sync-storage. see class doc for details: {@link PropertySyncStorage}.
+	 * @param file property file for simple key/value storage.
+	 * @param syncStorageFile property file for storing which objects were synced.
+	 */
 	public PropertySyncStorage(File file, File syncStorageFile) {
 		this.file = file;
 		this.syncStorageFile = syncStorageFile;

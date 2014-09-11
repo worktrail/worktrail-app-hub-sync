@@ -3,6 +3,7 @@ package net.worktrail.appapi.hub.git;
 import java.io.File;
 
 import net.worktrail.appapi.WorkTrailAppApi;
+import net.worktrail.appapi.hub.SyncStorage;
 import net.worktrail.appapi.hub.WorkTrailCliFramework;
 import net.worktrail.appapi.hub.WorkTrailSync;
 
