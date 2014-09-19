@@ -7,6 +7,10 @@ apply plugin: 'maven-publish'
 group = 'net.worktrail';
 version = '0.0.1'
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
+}
+
 repositories {
 	mavenLocal()
 	mavenCentral();
