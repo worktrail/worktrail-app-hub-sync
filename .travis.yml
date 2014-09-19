@@ -1,2 +1,11 @@
 language: java
-
+script:
+- ./gradlew check
+- ./gradlew distZip
+deploy:
+  provider: releases
+  api_key:
+    secure: OlYHKwFGzK1+4nEjrfBptFwudVK+8Pe9gTNuLVA595wED/kYy3mXi7R3IAif6CIPfYyYrRA/Vu3afojdusAJdkrFgyRbtXDnH/a8GkyAJRYcDIDeGXEN0WFlPir6fNePBg/3F1//HsIyGwmsKLxQO0xeCyIfwu8HJ+ckFlGsqkc=
+  file: build/distributions/worktrail-app-hub-sync*.zip
+  on:
+    repo: worktrail/worktrail-app-hub-sync
