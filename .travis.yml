@@ -9,3 +9,6 @@ deploy:
   file: build/distributions/worktrail-app-hub-sync*.zip
   on:
     repo: worktrail/worktrail-app-hub-sync
+    tags: true
+    all_branches: true
+
